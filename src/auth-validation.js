@@ -1,6 +1,6 @@
 /**
  * Author: Jose Manuel Martinez Deltell
- * Version: 1.0.0
+ * Version: 1.0.1
  *  
  */
 
@@ -28,7 +28,7 @@ class Auth_Validation {
 
     allow_message = true; // Permite mostrar mensaje de error Default true 
 
-    regex = /\d|\W|[-,_]/g; // expresion regular, busca numero y caracteres especiales, incluidos los espacios, guiones y barras bajas
+    regex = /\W|[-,_]/g; // expresion regular, busca numero y caracteres especiales, incluidos los espacios, guiones y barras bajas
 
     UserConfig = {
         placeholder: 'Escribir Nombre Usuario', // texto por defecto del campo
@@ -60,7 +60,7 @@ class Auth_Validation {
 
     EmailConfig = {
         placeholder: 'Escribir E-mail', // texto por defecto del campo
-        regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/, // expresion regular para validacion del email
+        regex: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/, // expresion regular para validacion del email
     }
 
     constructor({
@@ -178,7 +178,7 @@ class Auth_Validation {
      * @returns devuelve false si cumple con algunas restricciones
      */
     _signin_auth_validation() {
-        this._remove_element([this.IDs.holder_NameId, this.IDs.holder_UserId, this.IDs.holder_PasswordId, this.IDs.holder_ConfirmPasswordId]);
+        this._remove_element([this.IDs.holder_NameId, this.IDs.holder_EmailId, this.IDs.holder_UserId, this.IDs.holder_PasswordId, this.IDs.holder_ConfirmPasswordId]);
 
         // All fields
         if (document.getElementById(this.IDs.holder_UserId).value === '' ||
@@ -317,8 +317,9 @@ class Auth_Validation {
      * @returns devuelve false si cumple con algunas restricciones
      */
     _validate_email() {
-       // email
-        if (!this.EmailConfig.regex.test(document.getElementById(this.IDs.holder_EmailId).value)) {
+        // email
+        let email_bool = this.EmailConfig.regex.test(document.getElementById(this.IDs.holder_EmailId).value);
+        if (!email_bool) {
             this._message_err(`El correo no esta bien formado.`, this.IDs.holder_EmailId);
             return false;
         }
@@ -328,13 +329,7 @@ class Auth_Validation {
      *  Valida el campo Password
      * @returns devuelve false si cumple con algunas restricciones
      */
-    _validate_password() {document
-        // Equals Passwords
-        if (document.getElementById(this.IDs.holder_PasswordId).value != document.getElementById(this.IDs.holder_ConfirmPasswordId).value) {
-            this._message_err(`Las contraseñas tienen que ser iguales.`, this.IDs.holder_ConfirmPasswordId);
-            return false;
-        }
-
+    _validate_password() {
         // Password
         if (document.getElementById(this.IDs.holder_PasswordId).value.length > this.PassConfig.maxlength) {
             this._message_err(`La contraseña es demasiado larga.`, this.IDs.holder_ConfirmPasswordId);
@@ -345,15 +340,21 @@ class Auth_Validation {
             return false;
         }
         if (this.PassConfig.numbers && [...document.getElementById(this.IDs.holder_PasswordId).value.matchAll(/[0-9]/g)].length < this.PassConfig.minNumbers) {
-            this._message_err(`La contraseña debe tener mínimo ${this.PassConfig.minNumbers} Número/s.`, this.IDs.holder_PasswordId);
+            this._message_err(`La contraseña debe tener mínimo ${this.PassConfig.minNumbers} Número/s.`, this.IDs.holder_ConfirmPasswordId);
             return false;
         }
         if (this.PassConfig.uppercase && [...document.getElementById(this.IDs.holder_PasswordId).value.matchAll(/[A-Z]/g)].length < this.PassConfig.minUppercase) {
-            this._message_err(`La contraseña debe tener mínimo ${this.PassConfig.minUppercase} letra/s en Mayúscula.`, this.IDs.holder_PasswordId);
+            this._message_err(`La contraseña debe tener mínimo ${this.PassConfig.minUppercase} letra/s en Mayúscula.`, this.IDs.holder_ConfirmPasswordId);
             return false;
         }
         if (this.PassConfig.specialChar && [...document.getElementById(this.IDs.holder_PasswordId).value.matchAll(this.regex)].length < this.PassConfig.minSpecialChar) {
-            this._message_err(`La contraseña debe tener mínimo ${this.PassConfig.minSpecialChar} caracteres especiales.`, this.IDs.holder_PasswordId);
+            this._message_err(`La contraseña debe tener mínimo ${this.PassConfig.minSpecialChar} caracteres especiales.`, this.IDs.holder_ConfirmPasswordId);
+            return false;
+        }
+
+        // Equals Passwords
+        if (document.getElementById(this.IDs.holder_PasswordId).value != document.getElementById(this.IDs.holder_ConfirmPasswordId).value) {
+            this._message_err(`Las contraseñas tienen que ser iguales.`, this.IDs.holder_ConfirmPasswordId);
             return false;
         }
     }

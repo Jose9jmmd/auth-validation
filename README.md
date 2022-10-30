@@ -1,7 +1,7 @@
 # Auth Validation
 Librería JS para validación, de autentificación de Inicio sesión, Registro y Actualización de los datos.
 
-Actual Version: 1.0.0
+Actual Version: 1.0.1
 
 ## Como Instalar
  
@@ -9,7 +9,7 @@ Actual Version: 1.0.0
 
 - Version
 ```
-<script src="https://cdn.jsdelivr.net/gh/Jose9jmmd/auth_validation@1.0.0/src/auth-validation.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Jose9jmmd/auth_validation@1.0.1/src/auth-validation.js"></script>
 ```
 - Latest
 ```
