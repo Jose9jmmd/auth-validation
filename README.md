@@ -1,7 +1,7 @@
 # Auth Validation
 Librería JS para validación, de autentificación de Inicio sesión, Registro y Actualización de los datos.
 
-Actual Version: 1.0.1
+Actual Version: 1.0.2
 
 ## Como Instalar
  
@@ -38,10 +38,10 @@ Tambien existen IDs para cada boton, que tambien se pueden modificar.
 
 - *Boton Iniciar Sesion* = auth_val_btnLogin
 - *Boton Registrarse* = auth_val_btnSignin
-- *Boton Actualizar Usuario* = auth_val_btnUser
-- *Boton Actualizar Nombre* = auth_val_btnName
-- *Boton Actualizar Email* = auth_val_btnEmail
-- *Boton Actualizar Contraseña* = auth_val_btnPassword
+- *Boton Actualizar Usuario* = auth_val_btnUpdateUser
+- *Boton Actualizar Nombre* = auth_val_btnUpdateName
+- *Boton Actualizar Email* = auth_val_btnUpdateEmail
+- *Boton Actualizar Contraseña* = auth_val_btnUpdatePassword
 
 Para poder modificar cada ID, en el momento que instaciamos la clase añadimos algo tal que asi:
 

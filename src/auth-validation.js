@@ -1,6 +1,6 @@
 /**
  * Author: Jose Manuel Martinez Deltell
- * Version: 1.0.1
+ * Version: 1.0.2
  *  
  */
 
@@ -82,6 +82,7 @@ class Auth_Validation {
             holder_BtnSigninId: IDs.holder_BtnSigninId,
             holder_BtnUpdateUserId: IDs.holder_BtnUpdateUserId,
             holder_BtnUpdateNameId: IDs.holder_BtnUpdateNameId,
+            holder_BtnUpdateEmailId: IDs.holder_BtnUpdateEmailId,
             holder_BtnUpdatePasswordId: IDs.holder_BtnUpdatePasswordId,
         }
 
@@ -232,7 +233,6 @@ class Auth_Validation {
      */
     _update_Email_auth_validation() {
         this._remove_element([this.IDs.holder_EmailId]);
-
         if (document.getElementById(this.IDs.holder_EmailId).value === '') {
             this._message_err(`El campo no puede estar vacío.`, this.IDs.holder_EmailId);
             return false;
@@ -246,7 +246,7 @@ class Auth_Validation {
      * @returns devuelve false si cumple con algunas restricciones
      */
     _update_Password_auth_validation() {
-        this._remove_element([this.IDs.holder_UserId]);
+        this._remove_element([this.IDs.holder_ConfirmPasswordId]);
 
         if (document.getElementById(this.IDs.holder_PasswordId).value === '' || document.getElementById(this.IDs.holder_ConfirmPasswordId).value === '') {
             this._message_err(`Los campos no pueden estar vacíos.`, this.IDs.holder_ConfirmPasswordId);
@@ -264,8 +264,8 @@ class Auth_Validation {
         if (document.getElementById(this.IDs.holder_BtnSigninId)) document.getElementById(this.IDs.holder_BtnSigninId).addEventListener("click", (e) => { e.preventDefault(); this._signin_auth_validation(); });
         if (document.getElementById(this.IDs.holder_BtnUpdateNameId)) document.getElementById(this.IDs.holder_BtnUpdateNameId).addEventListener("click", (e) => { e.preventDefault(); this._update_Name_auth_validation(); });
         if (document.getElementById(this.IDs.holder_BtnUpdateUserId)) document.getElementById(this.IDs.holder_BtnUpdateUserId).addEventListener("click", (e) => { e.preventDefault(); this._update_User_auth_validation(); });
-        if (document.getElementById(this.IDs.holder_BtnUpdatePasswordId)) document.getElementById(this.IDs.holder_BtnUpdatePasswordId).addEventListener("click", (e) => { e.preventDefault(); this._update_User_auth_validation(); });
         if (document.getElementById(this.IDs.holder_BtnUpdateEmailId)) document.getElementById(this.IDs.holder_BtnUpdateEmailId).addEventListener("click", (e) => { e.preventDefault(); this._update_Email_auth_validation(); });
+        if (document.getElementById(this.IDs.holder_BtnUpdatePasswordId)) document.getElementById(this.IDs.holder_BtnUpdatePasswordId).addEventListener("click", (e) => { e.preventDefault(); this._update_Password_auth_validation(); });
     }
 
     /**
